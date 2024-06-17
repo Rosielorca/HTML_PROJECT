@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: pink;
+        }
+        .menu {
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            max-width: 1000px;
+            max-height: 1000px;
+            overflow-y: auto;
+        }
+        .menu h2 {
+            margin-top: 0;
+        }
+        .menu button {
+            padding: 10px 20px;
+            margin: 3px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: pink;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .menu button:hover {
+            background-color: gray;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .menu li {
+            margin-bottom: 30px;
+            margin-right: 20px;
+        }
+        .custom-checkbox {
+            -webkit-appearance: none;
+            border: 2px solid pink;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            cursor: pointer;           
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .custom-checkbox:checked {
+            background-color: gray;
+            border-color: gray;
+        }
+        .custom-checkbox:focus {
+            border-color: pink;
+        }
+        .pink-line {
+            border-color: pink;
+        }
+        .receipt {
+            text-align: left;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            max-width: 600px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div class="menu">
+    <h1 style="color: pink;">MENU</h1>
+    <button onclick="toggleVisibility('mainDishes')">Main Dishes</button>
+    <button onclick="toggleVisibility('vegetables')">Vegetables</button>
+    <button onclick="toggleVisibility('desserts')">Desserts</button>
+    <button onclick="toggleVisibility('drinks')">Drinks</button>
+    <button onclick="toggleVisibility('addsOn')">Adds On</button>
+    <button onclick="showRestaurantInfo()">Restaurant Info</button>
+    <button onclick="generateReceipt()">Receipt</button>
+
+    <div id="mainDishes" style="display:none;">
+        <h3 style="color: pink;">Main Dishes</h3>
+        <ul>
+            <li><input type="checkbox" class="custom-checkbox" value="450.00" onclick="calculateTotal(this)"> <b>Steak</b> - ₱450.00</li>
+            <img src="C:\Lorca_Rose Ann\Steak.jpg" alt="Steak" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="350.00" onclick="calculateTotal(this)"> <b>Bulalo</b> - ₱350.00</li>
+	    <img src="C:\Lorca_Rose Ann\Bulalo.jpg" alt="Bulalo" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="250.00" onclick="calculateTotal(this)"> <b>Adobong Pusit</b> - ₱250.00</li>
+	    <img src="C:\Lorca_Rose Ann\AdobongPusit.jpg" alt="Pusit" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="250.00" onclick="calculateTotal(this)"> <b>Sisig</b> - ₱250.00</li>
+	    <img src="C:\Lorca_Rose Ann\sisig.jpeg" alt="Sisig" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="150.00" onclick="calculateTotal(this)"> <b>Pancit Bihon</b> - ₱150.00</li>
+	    <img src="C:\Lorca_Rose Ann\pancitbihon.jpg" alt="Bihon" width="100" height="100">
+        </ul>
+        <hr class="pink-line">
+    </div>
+
+    <div id="vegetables" style="display:none;">
+        <h3 style="color: pink;">Vegetables</h3>
+        <ul>
+            <li><input type="checkbox" class="custom-checkbox" value="65.00" onclick="calculateTotal(this)"> <b>Tortang Talong</b> - ₱65.00</li>
+	    <img src="C:\Lorca_Rose Ann\tortangtalong.jpg" alt="Talong" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="50.00" onclick="calculateTotal(this)"> <b>Ginisang Kangkong</b> - ₱50.00</li>
+	    <img src="C:\Lorca_Rose Ann\kangkong.jpg" alt="KK" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="45.00" onclick="calculateTotal(this)"> <b>Pinakbet</b> - ₱45.00</li>
+	     <img src="C:\Lorca_Rose Ann\pakbet.jpg" alt="Pakbet" width="100" height="100">
+        </ul>
+        <hr class="pink-line">
+    </div>
+
+    <div id="desserts" style="display:none;">
+        <h3 style="color: pink;">Desserts</h3>
+        <ul>
+            <li><input type="checkbox" class="custom-checkbox" value="70.00" onclick="calculateTotal(this)"> <b>Strawberry Cake</b> - ₱70.00</li>
+	    <img src="C:\Lorca_Rose Ann\STRAWBERRY.jpg" alt="Cake" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="55.00" onclick="calculateTotal(this)"> <b>Halo Halo</b> - ₱55.00</li>
+	    <img src="C:\Lorca_Rose Ann\HALOHALO.jpg" alt="HH" width="100" height="100">
+
+            <li><input type="checkbox" class="custom-checkbox" value="45.00" onclick="calculateTotal(this)"> <b>Ice Cream</b> - ₱45.00</li>
+            <img src="C:\Lorca_Rose Ann\ICE CREAM.jpg" alt="IC" width="100" height="100">
+        </ul>
+   	   <hr class="pink-line"> 
+    </div>
+
+    <div id="drinks" style="display:none;">
+        <h3 style="color: pink;">Drinks</h3>
+        <ul>
+	    <li><input type="checkbox" class="custom-checkbox" value="0.00" onclick="calculateTotal(this)"> <b>Water</b> - FREE</li>
+	    <img src="C:\Lorca_Rose Ann\water.jpg" alt="H2o" width="150" height="150">
+
+            <li><input type="checkbox" class="custom-checkbox" value="30.00" onclick="calculateTotal(this)"> <b>Cola</b> - ₱30.00</li>
+	    <img src="C:\Lorca_Rose Ann\cola.jpg" alt="Cola" width="150" height="150">
+
+            <li><input type="checkbox" class="custom-checkbox" value="25.00" onclick="calculateTotal(this)"> <b>Juice</b> - ₱25.00</li>
+	     <img src="C:\Lorca_Rose Ann\juice.jpg" alt="Juice" width="150" height="150">
+
+            <li><input type="checkbox" class="custom-checkbox" value="65.00" onclick="calculateTotal(this)"> <b>Coffee</b> - ₱65.00</li>
+             <img src="C:\Lorca_Rose Ann\coff.jpg" alt="coffee" width="150" height="150">
+        </ul>
+        <hr class="pink-line"> 
+    </div>
+
+    <div id="addsOn" style="display:none;">
+        <h3 style="color: pink;">Adds On</h3>
+        <ul>
+	    <li><input type="checkbox" class="custom-checkbox" value="20.00" onclick="calculateTotal(this)"> <b>Fried Egg</b> - ₱20.00</li>
+	    <li><input type="checkbox" class="custom-checkbox" value="25.00" onclick="calculateTotal(this)"> <b>Mushroom</b> - ₱25.00</li>
+	    <li><input type="checkbox" class="custom-checkbox" value="15.00" onclick="calculateTotal(this)"> <b>Extra Sauce</b> - ₱15.00</li>
+    </ul>
+        <hr class="pink-line">
+    </div>
+    
+    <div id="restaurantInfo" style="display:none;">
+        <b style="color: pink;">
+  	<p style="color: pink;">Welcome to our restaurant! We serve delicious dishes prepared with fresh ingredients.</p>
+ 	  <p style="color: pink;">Location: Patutong Malaki South Tagaytay City</p>
+  	<p style="color: pink;">Contact: Rose Ann Lorca / 0999999999</p></b>
+    </div>
+
+    <h5 align="right">Total Amount: <span id="totalAmount" style="color: pink;">₱0.00</span></h5>
+</div>
+
+<div class="receipt" id="receipt">
+    <h3 style="color: pink;">Receipt</h3>
+    <ul id="receiptItems"></ul>
+    <h5>Total: <span id="receiptTotal" style="color: pink;">₱0.00</span></h5>
+    <button onclick="buyItems()" style="background-color: pink; color: white; border: none; border-radius: 5px; padding: 10px 20px;">Buy</button>
+</div>
+
+<script>
+    function toggleVisibility(id) {
+        var element = document.getElementById(id);
+        var restaurantInfo = document.getElementById("restaurantInfo");
+
+        if (element.style.display === "none") {
+            element.style.display = "block";
+            restaurantInfo.style.display = "none";
+        } else {
+            element.style.display = "none";
+        }
+    }
+
+    function showRestaurantInfo() {
+        var restaurantInfo = document.getElementById("restaurantInfo");
+        restaurantInfo.style.display = "block";
+    }
+
+    function calculateTotal(item) {
+        var total = parseFloat(document.getElementById("totalAmount").innerText.slice(1));
+        if (item.checked) {
+            total += parseFloat(item.value);
+        } else {
+            total -= parseFloat(item.value);
+        }
+        document.getElementById("totalAmount").innerText = "₱" + total.toFixed(2);
+    }
+
+    function generateReceipt() {
+        var receiptItems = document.getElementById("receiptItems");
+        var receiptTotal = document.getElementById("receiptTotal");
+        var totalAmount = parseFloat(document.getElementById("totalAmount").innerText.slice(1));
+        
+        // Clear previous receipt items
+        receiptItems.innerHTML = '';
+
+        // Get all checked items
+        var checkboxes = document.querySelectorAll('.custom-checkbox:checked');
+        checkboxes.forEach(function(checkbox) {
+            var item = checkbox.parentNode.textContent.trim();
+            var listItem = document.createElement("li");
+            listItem.textContent = item;
+            receiptItems.appendChild(listItem);
+        });
+
+        // Update receipt total
+        receiptTotal.textContent = "₱" + totalAmount.toFixed(2);
+
+        // Show the receipt
+        document.getElementById("receipt").style.display = "block";
+    }
+
+	function buyItems() {
+    // Check if any items are selected
+    var checkboxes = document.querySelectorAll('.custom-checkbox:checked');
+    if (checkboxes.length > 0) {
+        // If items are selected, show thank you message
+        alert("Thank you for your purchase!");
+    } else {
+        // If no items are selected, show a message indicating no items are selected
+        alert("Please select items before purchasing.");
+    }
+    
+    // Reset all checkboxes and total amount
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = false;
+    });
+    document.getElementById("totalAmount").innerText = "₱0.00";
+    document.getElementById("receipt").style.display = "none";
+}
+</script>
+
+<a href="E:\LORCA_HTML_PROJ\INDEX.HTML" class="btn btn-primary" style="background-color: pink; color: white;">Back to Home</a>
+</body>
+</html>
