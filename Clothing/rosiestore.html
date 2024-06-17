@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rosie store</title>
+       <style>
+
+    body { 
+        font-family: Arial, sans-serif; 
+        background-color: #f9e4e4; 
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background-color: #f9e4e4; 
+        text-align: center;
+        padding: 0;
+        width: 100%;
+        height: 500px; 
+        overflow: hidden; 
+    }
+    header img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+    }
+    .nav { 
+        display: flex; 
+        justify-content: space-around; 
+        background-color: white;
+        padding: 20px; 
+        border-bottom: 4px solid #ddd; 
+    }
+    .nav a { 
+        text-decoration: none; 
+        color: #333; 
+        padding: 20px 70px; 
+        color: white;
+        background-color: #DB7093;
+        border-radius: 5px; 
+        transition: background-color 0.3s; 
+    }
+    .nav a:hover { 
+        background-color: pink;
+    }
+    .container { 
+        padding: 5px; 
+        display: none; 
+    }
+    .container.active { 
+        display: flex; 
+        flex-wrap: wrap; 
+    }
+    .item-container { 
+        margin: 30px; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center; 
+        border: 3px solid #ccc; 
+        padding: 20px; 
+        background-color: #fff; 
+        border-radius: 10px; 
+    }
+    .item img { 
+        width: 100px; 
+        height: 100px; 
+        margin-bottom: 10px; 
+    }
+    .item div { 
+        margin-top: auto;
+    }
+    .price {
+        color: #ff69b4; 
+    }
+    .receipt { 
+        position: fixed; 
+        top: 20px; 
+        right: 20px; 
+        padding: 20px; 
+        border: 1px solid #ddd; 
+        background-color: #fff; 
+        z-index: 1000; 
+        display: none; 
+    }
+    .receipt h2 { 
+        margin-top: 0; 
+    }
+    .receipt-buttons { 
+        margin-top: 20px; 
+        text-align: center; 
+    }
+    .receipt-buttons button { 
+        margin-right: 10px; 
+        color: white;
+        background-color: #DB7093;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .receipt-buttons button:hover { 
+        background-color: pink;
+    }
+    .stock-management-panel { 
+            position: fixed; 
+            top: 20px; 
+            left: 20px; 
+            padding: 20px; 
+            border: 1px solid #ddd;
+            background-color: #fff; 
+            z-index: 1000; 
+            display: none; 
+        }
+        .stock-management-panel h2 { 
+            margin-top: 0; 
+    }
+    button {
+        color: white;
+        background-color: #DB7093;
+        border: 3px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #F8C8DC;
+    }
+    h4 {
+        color: #fc89ac;
+    }
+</style>
+
+</head>
+<body>
+
+    <header>
+        <img src="header.png" alt="header">
+    </header>
+
+	
+    <div class="nav">
+        <a href="#jeans" onclick="showCategory('jeans')"><b>Jeans</b></a>
+        <a href="#tshirts" onclick="showCategory('tshirts')"><b>T-Shirts</b></a>
+        <a href="#perfume" onclick="showCategory('perfume')"><b>Perfume</b></a>
+        <a href="#sandals" onclick="showCategory('sandals')"><b>Sandals</b></a>
+        <a href="#toys" onclick="showCategory('toys')"><b>Toys</a>
+    </div>
+
+    <div class="container" id="jeans">
+        <div class="item-container">
+            <div class="item" data-name="Jeans 1" data-price="350" data-stock="100" >
+                <img src="loose4.jpg" alt="loose4" style="width: 100%; height: 250px;">
+                <div>
+                    <h4>Black Maong Jeans</h4>
+					<span>₱ 350.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item" data-name="Jeans 2" data-price="450" data-stock="100">
+                <img src="loose1.jpg" alt="loose1" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Loose Pants</h4>
+					<span>₱ 450.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+         <div class="item-container">
+            <div class="item" data-name="Jeans 3" data-price="400" data-stock="100">
+                <img src="loose3.jpg" alt="loose3" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Khaki Pants</h4>
+					<span>₱ 400.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+		 <div class="item-container">
+            <div class="item" data-name="Jeans 4" data-price="250" data-stock="100">
+                <img src="plain1.jpg" alt="plain1" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Comfortable Pants</h4>
+					<span>₱ 250.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+	</div>
+		
+
+   
+			 <div class="container" id="tshirts">
+        <div class="item-container">
+            <div class="item" data-name="T-Shirts 1" data-price="250" data-stock="100">
+                <img src="tshirt1.jpg" alt="tshirt1" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>V-line Tshirt</h4>
+					<span>₱ 250.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item" data-name="T-Shirts 2" data-price="350" data-stock="100">
+                <img src="tshirt5.jpg" alt="tshirt5" style="width: 80%; height: 250px;">
+                <div>
+					<h4>Comfortable Tshirt</h4>
+					<span>₱ 350.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+         <div class="item-container">
+            <div class="item" data-name="T-Shirts 3" data-price="450" data-stock="100">
+                <img src="tshirt6.jpg" alt="tshirt6" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>NIKE Pink Croptop</h4>
+					<span>₱ 450.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+		 <div class="item-container">
+            <div class="item" data-name="T-Shirt 4" data-price="250" data-stock="100">
+                <img src="crop2.jpg" alt="crop2" style="width: 80%; height: 250px;">
+                <div>
+					<h4>Sando Croptop</h4>
+					<span>₱ 250.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+			 <div class="container" id="perfume">
+        <div class="item-container">
+            <div class="item" data-name="Perfume 1" data-price="450" data-stock="100">
+                <img src="perf-p7.jpg" alt="perf-p7" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Soft Dreamy Pink</h4>
+					<span>₱ 450.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item" data-name="Perfume 2" data-price="350" data-stock="100">
+                <img src="perf-p2.jpg" alt="perf-p2" style="width: 80%; height: 250px;">
+                <div>
+					<h4>Pink Love Perfume</h4>
+					<span>₱ 350.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+         <div class="item-container">
+            <div class="item" data-name="Perfume 3" data-price="450" data-stock="100">
+                <img src="perf-p3.jpg" alt="perf-p3" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Colour Me Perfume</h4>
+					<span>₱ 450.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+		 <div class="item-container">
+            <div class="item" data-name="Perfume 4" data-price="550" data-stock="100">
+                <img src="perf-p4.jpg" alt="perf-p4" style="width: 80%; height: 250px;">
+                <div>
+					<h4>Victoria Secret</h4>
+					<span>₱ 550.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div class="container" id="sandals">
+        <div class="item-container">
+            <div class="item" data-name="Sandals 1" data-price="4000" data-stock="100">
+                <img src="heels1.jpg" alt="heels1" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Pink High Heels</h4>
+					<span>₱ 4000.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                   <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+        <div class="item-container">
+            <div class="item" data-name="Sandals 2" data-price="2500" data-stock="100">
+                <img src="heels5.jpg" alt="heels5" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Girly Heels</h4>
+					<span>₱ 2500.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+		<div class="item-container">
+            <div class="item" data-name="Sandals 3" data-price="4500" data-stock="100">
+                <img src="heels4.jpg" alt="heels4" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Light Pink Elegant Heels</h4>
+					<span>₱ 4500.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                   <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+		<div class="item-container">
+            <div class="item" data-name="Sandals 4" data-price="4500" data-stock="100">
+                <img src="heels6.jpg" alt="heels6" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Ribbon Pink Heels</h4>
+					<span>₱ 4500.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                   <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div class="container" id="toys">
+        <div class="item-container">
+            <div class="item" data-name="Toy 1" data-price="500" data-stock="100">
+                <img src="toy1.jpg" alt="toy1" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Plushie Unicorn</h4>
+					<span>₱ 500.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+       <div class="item-container">
+            <div class="item" data-name="Toy 2" data-price="1000" data-stock="100">
+                <img src="toy3.jpg" alt="toy3" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Make-Up whole Kit</h4>
+					<span>₱ 1000.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+		<div class="item-container">
+            <div class="item" data-name="Toy 3" data-price="200" data-stock="100">
+                <img src="toy4.jpg" alt="toy4" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>Banana Duck</h4>
+					<span>₱ 200.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                   <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+		<div class="item-container">
+            <div class="item" data-name="Toy 4" data-price="1200" data-stock="100">
+                <img src="toy5.jpg" alt="toy5" style="width: 80%; height: 250px;">
+                <div>
+                    <h4>3in1 Penguin Plushie</h4>
+					<span>₱ 1200.00</span><BR><br>
+                    <span>Stock: <span class="stock">100</span></span>
+                    <button onclick="changeQuantity(this, -1)">-</button>
+                    <span class="quantity">0</span>
+                    <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                    <button onclick="buyItem(this)"><b>Buy</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+    <div class="receipt" id="receipt">
+        <h2 style="color: #AA336A;" >Receipt</h2>
+		<br>
+        <div id="receiptItems"></div>
+		<br>
+        <div>
+            <label for="discount">Discount:</label>
+            <select id="discount" onchange="updateReceipt()">
+                <option value="0">None</option>
+                <option value="0.2">Senior (20%)</option>
+                <option value="0.3">PWD (30%)</option>
+                <option value="0.1">Student (10%)</option>
+            </select>
+        </div>
+		<br> 
+        <div id="totalPrice">Total Price: ₱ 0</div>
+		<br>
+        <div class="receipt-buttons">
+			<button onclick="proceedToPayment()">Payment</button>
+            <button onclick="cancelOrder()">Cancel Order</button>
+            
+        </div>
+    </div>
+
+   <div class="stock-management-panel" id="stockManagementPanel">
+        <h2>Stock Management</h2>
+        <form id="addItemForm">
+            <label for="category">Category:</label>
+            <select id="category">
+                <option value="jeans">Jeans</option>
+                <option value="tshirts">T-Shirts</option>
+                <option value="perfume">Perfume</option>
+                <option value="sandals">Sandals</option>
+                <option value="toys">Toys</option>
+            </select>
+            <br><br>
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" required>
+            <br><br>
+            <label for="itemPrice">Price:</label>
+            <input type="number" id="itemPrice" required>
+            <br><br>
+            <label for="itemStock">Stock:</label>
+            <input type="number" id="itemStock" required>
+            <br><br>
+            <button type="submit">Add Item</button>
+        </form>
+    </div>
+
+
+    <button onclick="showStockManagementPanel()">Manage Stocks</button>
+
+    <script>
+        let cart = [];
+
+        function changeQuantity(button, change) {
+            let quantitySpan = button.parentElement.querySelector('.quantity');
+            let stockSpan = button.parentElement.parentElement.querySelector('.stock');
+            let newQuantity = parseInt(quantitySpan.textContent) + change;
+            let stock = parseInt(stockSpan.textContent);
+            if (newQuantity < 0) newQuantity = 0;
+            if (newQuantity > stock) newQuantity = stock;
+            quantitySpan.textContent = newQuantity;
+        }
+
+        function buyItem(button) {
+            let itemElement = button.parentElement.parentElement;
+            let name = itemElement.dataset.name;
+            let price = parseInt(itemElement.dataset.price);
+            let quantity = parseInt(itemElement.querySelector('.quantity').textContent);
+            let stock = parseInt(itemElement.querySelector('.stock').textContent);
+            if (quantity > 0) {
+                cart.push({ name, price, quantity });
+                itemElement.querySelector('.stock').textContent = stock - quantity;
+                itemElement.querySelector('.quantity').textContent = 0;
+                updateReceipt();
+                showReceipt();
+            }
+        }
+
+        function updateReceipt() {
+            let receiptItemsDiv = document.getElementById('receiptItems');
+            receiptItemsDiv.innerHTML = '';
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                let itemTotal = item.price * item.quantity;
+                totalPrice += itemTotal;
+                receiptItemsDiv.innerHTML += `<div>${item.name} - ${item.quantity} x ₱${item.price} = ₱${itemTotal}</div>`;
+            });
+
+            let discount = parseFloat(document.getElementById('discount').value);
+            let discountAmount = totalPrice * discount;
+            totalPrice -= discountAmount;
+
+            document.getElementById('totalPrice').textContent = `Total Price: ₱${totalPrice.toFixed(2)} (Discount: ₱${discountAmount.toFixed(2)})`;
+        }
+
+        function showReceipt() {
+            let receiptPanel = document.getElementById('receipt');
+            receiptPanel.style.display = 'block';
+        }
+
+        function showCategory(category) {
+            let containers = document.querySelectorAll('.container');
+            containers.forEach(container => {
+                if (container.id === category) {
+                    container.classList.add('active');
+                } else {
+                    container.classList.remove('active');
+                }
+            });
+        }
+
+        function cancelOrder() {
+            cart = [];
+            updateReceipt();
+            hideReceipt();
+        }
+
+        function hideReceipt() {
+            let receiptPanel = document.getElementById('receipt');
+            receiptPanel.style.display = 'none';
+        }
+
+        function proceedToPayment() {
+            let totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            let totalPrice = parseFloat(document.getElementById('totalPrice').textContent.replace('Total Price: ₱', '').replace(' (Discount: ₱', '').replace(')', ''));
+            let discountedAmount = parseFloat(document.getElementById('totalPrice').textContent.match(/\(([^)]+)\)/)[1].replace('Discount: ₱', ''));
+            alert(`Total Items: ${totalItems}\n Total Price: ₱${totalPrice} \nDiscounted Amount: ₱${discountedAmount}\n \nProceeding to payment...`);
+   
+        }
+
+        function showStockManagementPanel() {
+            let stockManagementPanel = document.getElementById('stockManagementPanel');
+            stockManagementPanel.style.display = 'block';
+        }
+
+        document.getElementById('addItemForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let category = document.getElementById('category').value;
+            let itemName = document.getElementById('itemName').value;
+            let itemPrice = document.getElementById('itemPrice').value;
+            let itemStock = document.getElementById('itemStock').value;
+            let itemImage = document.getElementById('itemImage').value;
+
+			 let newItem = `
+                <div class="item-container">
+                    <div class="item" data-name="${itemName}" data-price="${itemPrice}" data-stock="${itemStock}">
+                        <img src="${itemImage}" alt="${itemName}" style="width: 80%; height: 250px;">
+                        <div>
+                            <h4>${itemName}</h4>
+                            <span>₱ ${itemPrice}</span><br><br>
+                            <span>Stock: <span class="stock">${itemStock}</span></span>
+                            <button onclick="changeQuantity(this, -1)">-</button>
+                            <span class="quantity">0</span>
+                            <button onclick="changeQuantity(this, 1)">+</button><br><br>
+                            <button onclick="buyItem(this)"><b>Buy</b></button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById(category).insertAdjacentHTML('beforeend', newItem);
+        });
+			document.getElementById('updateStockForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let category = document.getElementById('updateCategory').value;
+            let itemName = document.getElementById('existingItemName').value;
+            let additionalStock = parseInt(document.getElementById('additionalStock').value);
+
+            let items = document.getElementById(category).querySelectorAll('.item');
+            items.forEach(item => {
+                if (item.dataset.name === itemName) {
+                    let currentStock = parseInt(item.dataset.stock);
+                    let newStock = currentStock + additionalStock;
+                    item.dataset.stock = newStock;
+                    item.querySelector('.stock').textContent = newStock;
+                }
+            });
+        });
+    </script>
+	<a href="E:\LORCA_HTML_PROJ\INDEX.HTML" class="btn btn-primary" style="background-color: pink; color: white;">Back to Home</a>
+</body>
+</html>
