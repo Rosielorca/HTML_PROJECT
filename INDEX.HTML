@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showContent('home')">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Portfolio</a>
+                    <div class="dropdown-content">
+                        <a href="CV\cv.html">Curriculum Vitae</a>
+                        <a href="Reg form\regform.html">Registration Form</a>
+                        <a href="Food\restomenu.html">Foods</a>
+                        <a href="Clothing\rosiestore.html">Clothing Store</a>
+                    </div>
+                </li>
+                <li><a href="#" onclick="showContent('tutorial')">Tutorial</a></li>
+                <li><a href="#" onclick="showContent('about')">About Us</a></li>
+                <li><a href="#" onclick="showContent('contact')">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="content-section">
+            
+        </section>
+        <section id="tutorial" class="content-section" style="display: none;">
+            <h1>LEARN MORE</h1>
+            <b>Combining HTML, Bootstrap, CSS, and JavaScript allows developers to create a wide range of web forms that result in visually appealing,
+            functional, and user-friendly web apps. Below is a description of how to create a Curriculum Vitae, School Registration Form, Food form,
+            and Clothes form.</b><br><br>
+            <p><b>HTML (Hypertext Markup Language):</b>
+            HTML forms the foundation of the web, enabling the structure and organization of content. HTML is to empower individuals
+            to create well-structured and semantically meaningful web pages, laying the groundwork for accessible and user-friendly digital experiences.</p>
+            <br>
+            <b>CSS (Cascading Style Sheets):</b>
+            CSS allows for the presentation and styling of HTML elements, enhancing the visual appeal and user experience of web pages.</br>
+            <br>
+            <b>JavaScript (JS):</b>
+            JavaScript is a versatile programming language that adds interactivity and functionality to web pages.</br>
+            <br>
+            <b>Bootstrap (BS):</b>
+            Bootstrap is a popular front-end framework that streamlines the process of building responsive and mobile-first websites.</p>
+        </section>
+        
+        <section id="about" class="content-section" style="display: none;">
+            <h1>About Us</h1>
+            <p><b>Mission:</b><br><br>
+                Our mission is to empower individuals with the knowledge and skills to harness the power of HTML, CSS, JavaScript (JS),
+                and Bootstrap (BS) to create compelling and dynamic web experiences. We believe that proficiency in these languages is 
+                not only essential for success in the digital age but also a gateway to creativity, innovation, and opportunities in
+                the ever-evolving landscape of technology.
+                </br></br>
+                <br><b>Vision:</b><br><br>
+                We envision a future where individuals from all backgrounds have the ability to express themselves and bring their ideas 
+                to life through web development. By providing accessible and comprehensive resources for learning
+                HTML, CSS, JS, and BS, we aim to democratize digital literacy and foster a community of creators who are equipped to shape the digital world.</p></br>
+        </section>
+        <section id="contact" class="content-section" style="display: none;">
+            <h1>Contact Us</h1>
+            <p>Facebook: Rosie L</p>
+			<p>Phone No: 09101349872</p>
+			<p>Gmail: Rosie123@gmail.com</p>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
